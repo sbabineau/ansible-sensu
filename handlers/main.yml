@@ -1,0 +1,12 @@
+---
+
+# roles/sensu/handlers/main.yml
+
+- name: restart sensu client
+  service: name=sensu-client state=restarted sleep=1
+
+- name: stop sensu-server and sensu-api
+  service: name="{{item}}" state=stopped
+  with_items:
+    - sensu-api
+    - sensu-server

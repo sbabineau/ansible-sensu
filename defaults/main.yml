@@ -1,0 +1,12 @@
+---
+
+# roles/sensu/defaults/main.yml
+
+rabbitmq_host: 10.10.2.107
+rabbitmq_port: 5672
+rabbitmq_user: sensu
+rabbitmq_pw: sensu
+
+sensu_mode: client
+sensu_channels:
+  - all

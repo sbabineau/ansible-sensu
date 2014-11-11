@@ -1,0 +1,15 @@
+---
+
+# roles/sensu/tasks/main.yml
+
+- name: Install | add sensu apt-key
+  apt_key: url=http://repos.sensuapp.org/apt/pubkey.gpg state=present
+
+- name: Install | add sensu repository
+  apt_repository: repo="deb      http://repos.sensuapp.org/apt sensu main" state=present
+
+- name: Install | install sensu
+  apt: name=sensu state=present update_cache=yes cache_valid_time=900
+
+- name: Install | set sensu to use embedded ruby
+  copy: src=sensu dest=/etc/default/sensu owner=root group=root mode=0644

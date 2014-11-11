@@ -1,0 +1,26 @@
+---
+
+# roles/sensu/tasks/main.yml
+
+- include: dependencies.yml
+  tags:
+    - install
+    - sensu-install
+
+- include: install.yml
+  tags:
+    - install
+    - sensu-install
+
+- include: configure-client.yml
+  tags:
+    - configure
+    - sensu-configure
+  when: sensu_mode == "client"
+
+- include: configure-server.yml
+  tags:
+    - configure
+    - sensu-configure
+  when: sensu_mode == "server"
+

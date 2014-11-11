@@ -1,0 +1,7 @@
+---
+
+# roles/sensu/tasks/dependencies.yml
+
+- name: Dependencies | Install bc
+  apt: name=bc state=present
+

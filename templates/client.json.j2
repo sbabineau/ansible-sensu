@@ -1,0 +1,13 @@
+
+{
+  "comment": "{{ansible_managed}}",
+  "client": {
+    "name": "{{ansible_fqdn}}",
+    "address": "{{ansible_default_ipv4.address}}",
+    "subscriptions": [ 
+{% for channel in sensu_channels %}
+      "{{channel}}"{% if not loop.last %},{% endif %}
+{% endfor %}
+    ]
+  }
+}

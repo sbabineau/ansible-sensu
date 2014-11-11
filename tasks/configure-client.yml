@@ -1,0 +1,23 @@
+---
+
+# roles/sensu/tasks/configure-client.yml
+
+- name: Configure Client | add config files
+  template: src="{{item.src}}" dest="/etc/sensu/conf.d/{{item.dest}}" owner=sensu group=admin mode=0755
+  with_items:
+    - {src: client.json.j2, dest: client.json}
+    - {src: rabbitmq.json.j2, dest: rabbitmq.json}
+  notify: restart sensu client
+
+- name: Configure Client | add scripts
+  copy: src="{{item}}" dest="/etc/sensu/plugins/{{item}}" owner=sensu group=admin mode=0755
+  with_items:
+    - check-disk.rb
+    - check-http.rb
+    - check-load.rb
+    - check-memory-pcnt.sh
+    - check-procs.rb
+    - check-swap-percentage.sh
+    - disk-usage-metrics.rb
+    - load-metrics.rb
+    - memory-metrics.rb
